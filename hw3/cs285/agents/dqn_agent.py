@@ -51,7 +51,7 @@ class DQNAgent(nn.Module):
         q_values = self.critic(observation)
         greedy_action = torch.argmax(q_values)
         random_action = torch.randint(self.num_actions, (), device=ptu.device)
-        action = torch.where(torch.rand(1) < epsilon, random_action, greedy_action)
+        action = torch.where(torch.rand(1, device=ptu.device) < epsilon, random_action, greedy_action)
 
         return ptu.to_numpy(action).squeeze(0).item()
 
