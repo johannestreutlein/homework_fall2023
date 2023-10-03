@@ -51,10 +51,7 @@ class DQNAgent(nn.Module):
         q_values = self.critic(observation)
         greedy_action = torch.argmax(q_values)
         random_action = torch.randint(self.num_actions, ())
-        if torch.rand(1) < epsilon:
-            action = random_action
-        else:
-            action = greedy_action
+        action = torch.where(torch.rand(1, device=q_values.device) < epsilon, random_action, greedy_action)
 
         return ptu.to_numpy(action).squeeze(0).item()
 
@@ -120,7 +117,7 @@ class DQNAgent(nn.Module):
         """
         # TODO(student): update the critic, and the target if needed
 
-        if self.target_update_period % step == 0:
+        if step % self.target_update_period == 0:
             self.update_target_critic()
 
         critic_stats = self.update_critic(obs, action, reward, next_obs, done)
