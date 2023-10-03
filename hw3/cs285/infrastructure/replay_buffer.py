@@ -219,7 +219,6 @@ class MemoryEfficientReplayBuffer:
 
         Use like:
             replay_buffer.insert(
-                observation=observation,
                 action=action,
                 reward=reward,
                 next_observation=next_observation,
