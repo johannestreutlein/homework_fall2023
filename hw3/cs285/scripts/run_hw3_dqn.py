@@ -97,6 +97,7 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
         next_observation, reward, done, info = env.step(action)
 
         next_observation = np.asarray(next_observation)
+
         truncated = info.get("TimeLimit.truncated", False)
 
         # TODO(student): Add the data to the replay buffer
@@ -106,7 +107,8 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
             replay_buffer.insert(
                 action=action,
                 reward=reward,
-                next_observation=next_observation,
+                # only insert one of the images in the stack? the first one maybe?
+                next_observation=next_observation[0],
                 done=done and not truncated,
             )
         else:
