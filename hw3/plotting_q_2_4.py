@@ -4,7 +4,7 @@ from tensorflow.python.summary.summary_iterator import summary_iterator
 
 base_dir = "data/"
 
-experiment_folders = [folder for folder in os.listdir(base_dir) if folder.startswith("hw3_dqn_dqn_CartPole-v1_s64_l2_d0.99_03-10-2023_16-52-23")]
+experiment_folders = [folder for folder in os.listdir(base_dir) if folder.startswith("hw3_dqn_dqn_CartPole-v1_s64_l2_d0.99_03-10-2023_17-13-01")]
 
 def extract_data_from_event(event_file):
     env_steps = []

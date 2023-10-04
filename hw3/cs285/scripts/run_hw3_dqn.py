@@ -106,7 +106,7 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
                 action=action,
                 reward=reward,
                 next_observation=next_observation,
-                done=done,
+                done=done and not truncated,
             )
         else:
             # We're using the regular replay buffer
@@ -115,7 +115,7 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
                 action=action,
                 reward=reward,
                 next_observation=next_observation,
-                done=done,
+                done=done and not truncated,
             )
 
         # Handle episode termination
