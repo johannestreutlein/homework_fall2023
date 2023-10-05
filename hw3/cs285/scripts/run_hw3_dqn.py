@@ -106,11 +106,13 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
             # so we only insert next_observation (not observation)
             if stacked_frames:
                 # We're using a stack of frames, so we need to insert the last frame
-                next_observation = next_observation[-1]
+                buffer_obs = next_observation[-1]
+            else:
+                buffer_obs = next_observation
             replay_buffer.insert(
                 action=action,
                 reward=reward,
-                next_observation=next_observation,
+                next_observation=buffer_obs,
                 done=done and not truncated,
             )
         else:
