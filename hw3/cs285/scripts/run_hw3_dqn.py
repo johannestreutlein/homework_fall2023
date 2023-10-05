@@ -110,7 +110,6 @@ def run_training_loop(config: dict, logger: Logger, args: argparse.Namespace):
             replay_buffer.insert(
                 action=action,
                 reward=reward,
-                # only insert one of the images in the stack? the first one maybe?
                 next_observation=next_observation,
                 done=done and not truncated,
             )
