@@ -5,8 +5,8 @@ from tensorflow.python.summary.summary_iterator import summary_iterator
 base_dir = "data/"
 
 single_q = "hw3_sac_sac_hopper_singlecritic_Hopper-v4_reparametrize_s128_l3_alr0.0003_clr0.0003_b256_d0.99_t0.05_stu0.005_06-10-2023_17-49-12"
-double_q = "hw3_sac_sac_hopper_doubleq_Hopper-v4_reparametrize_s128_l3_alr0.0003_clr0.0003_b256_d0.99_t0.05_stu0.005_doubleq_06-10-2023_17-48-54"
-clipped_q = "hw3_sac_sac_hopper_clipq_Hopper-v4_reparametrize_s128_l3_alr0.0003_clr0.0003_b256_d0.99_t0.05_stu0.005_min_06-10-2023_17-48-09"
+double_q = "hw3_sac_sac_hopper_doubleq_Hopper-v4_reparametrize_s128_l3_alr0.0003_clr0.0003_b256_d0.99_t0.05_stu0.005_doubleq_14-10-2023_15-32-12"
+clipped_q = "hw3_sac_sac_hopper_clipq_Hopper-v4_reparametrize_s128_l3_alr0.0003_clr0.0003_b256_d0.99_t0.05_stu0.005_min_14-10-2023_15-32-35"
 
 def get_legend_label(experiment):
     if "singlecritic" in experiment:

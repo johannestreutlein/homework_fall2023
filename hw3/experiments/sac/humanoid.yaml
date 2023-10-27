@@ -1,6 +1,7 @@
+
 base_config: sac
 env_name: Humanoid-v4
-exp_name: sac_humanoid
+exp_name: sac_humanoid_clipq_500k
 
 num_critic_networks: 2
 target_critic_backup_type: min

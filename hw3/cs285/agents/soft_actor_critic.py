@@ -197,10 +197,10 @@ class SoftActorCritic(nn.Module):
 
             # Handle Q-values from multiple different target critic networks (if necessary)
             # (For double-Q, clip-Q, etc.)
-            next_qs = self.q_backup_strategy(next_qs)
+            mod_next_qs = self.q_backup_strategy(next_qs)
 
             # Compute the target Q-value
-            target_values: torch.Tensor = reward + self.discount * (1 - done.float()) * next_qs
+            target_values: torch.Tensor = reward + self.discount * (1 - done.float()) * mod_next_qs
 
             assert next_qs.shape == (
                 self.num_critic_networks,
