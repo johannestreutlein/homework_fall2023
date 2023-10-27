@@ -154,6 +154,7 @@ class SoftActorCritic(nn.Module):
         elif self.target_critic_backup_type == "min":
             # Clip to the minimum of the two critics' predictions.
             next_qs = torch.min(next_qs, dim=0)[0]
+
         else:
             # Default, we don't need to do anything.
             pass
@@ -197,10 +198,8 @@ class SoftActorCritic(nn.Module):
 
             # Handle Q-values from multiple different target critic networks (if necessary)
             # (For double-Q, clip-Q, etc.)
-            mod_next_qs = self.q_backup_strategy(next_qs)
+            next_qs = self.q_backup_strategy(next_qs)
 
-            # Compute the target Q-value
-            target_values: torch.Tensor = reward + self.discount * (1 - done.float()) * mod_next_qs
 
             assert next_qs.shape == (
                 self.num_critic_networks,
@@ -211,6 +210,15 @@ class SoftActorCritic(nn.Module):
                 # TODO(student): Add entropy bonus to the target values for SAC
                 next_action_entropy = self.entropy(next_action_distribution)
                 next_qs += self.temperature * next_action_entropy
+
+            # Compute the target Q-value
+            target_values: torch.Tensor = reward + self.discount * (1 - done.float()) * next_qs
+
+            # Compute the target Q-value
+            assert target_values.shape == (
+                self.num_critic_networks,
+                batch_size
+            )
 
         # TODO(student): Update the critic
         # Predict Q-values
